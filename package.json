@@ -10,14 +10,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:helloWorld"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "helloWorld",
-        "title": "Hello World"
+        "command": "ai-connector.insertText",
+        "title": "AI Connector: Insert Text"
       }
     ]
   },

@@ -1,26 +1,38 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import fetch from 'node-fetch';
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "ai-connector" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from ai_connector!');
-	});
-
-	context.subscriptions.push(disposable);
+async function isOllamaRunning() {
+	try {
+		const res = await fetch('http://localhost:11434/api/tags');
+		return res.ok;
+	} catch {
+		return false;
+	}
 }
 
-// This method is called when your extension is deactivated
+function writeIntoCursor(): vscode.Disposable {
+	const disposable = vscode.commands.registerCommand('ai-connector.insertText', async () => {
+		const editor = vscode.window.activeTextEditor;
+
+		if (!editor) {
+			vscode.window.showErrorMessage('No active editor');
+			return;
+		}
+
+		const position = editor.selection.active;
+
+		await editor.edit(editBuilder => {
+			editBuilder.insert(position, 'Hello from AI Connector! New insert!');
+		});
+	});
+
+	return disposable;
+}
+
+export function activate(context: vscode.ExtensionContext) {
+	const writeIntoCursorDisposable = writeIntoCursor();
+
+	context.subscriptions.push(writeIntoCursorDisposable);
+}
+
 export function deactivate() {}
