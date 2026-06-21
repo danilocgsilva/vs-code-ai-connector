@@ -3,6 +3,7 @@
   "displayName": "ai_connector",
   "description": "Allows the use of AI inside Visual Studio Code, including offline usage",
   "version": "0.0.1",
+  "publisher": "danilo-silva",
   "engines": {
     "vscode": "^1.116.0"
   },
@@ -20,6 +21,14 @@
       {
         "command": "ai-connector.testOllamaServer",
         "title": "AI Connector: Test AI Server"
+      },
+      {
+        "command": "ai-connector.manageExtension",
+        "title": "AI Connector: Manage Extension"
+      },
+      {
+        "command": "ai-connector.openSettings",
+        "title": "AI Connector: Open Settings"
       }
     ],
     "configuration": {

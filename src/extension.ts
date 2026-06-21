@@ -14,11 +14,18 @@ export function activate(context: vscode.ExtensionContext) {
 	const initialHost = updateConfig();
 	aiConnector.setOllamaHost(initialHost);
 
+	// Commands registration
 	const writeIntoCursor: vscode.Disposable = aiConnector.getDisposable("ai-connector.insertText");
-	const testOllamaServer: vscode.Disposable = aiConnector.getDisposable("ai-connector.testOllamaServer");
-
 	context.subscriptions.push(writeIntoCursor);
+
+	const testOllamaServer: vscode.Disposable = aiConnector.getDisposable("ai-connector.testOllamaServer");
 	context.subscriptions.push(testOllamaServer);
+
+	const extensionManager: vscode.Disposable = aiConnector.getDisposable("ai-connector.manageExtension");
+	context.subscriptions.push(extensionManager);
+
+	const settingsPage: vscode.Disposable = aiConnector.getDisposable("ai-connector.openSettings");
+	context.subscriptions.push(settingsPage);
 
 	// Listen for config changes
 	const configurationListener = vscode.workspace.onDidChangeConfiguration(async (e) => {
