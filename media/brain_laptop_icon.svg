@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <g fill="none" stroke="#000" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Laptop -->
+    <rect x="48" y="40" width="160" height="112" rx="8"/>
+    <path d="M24 184h208"/>
+    <path d="M40 152l-16 32h208l-16-32"/>
+    
+    <!-- Brain inside screen -->
+    <path d="M103 79
+             c-10-12-30-3-30 13
+             c0 8 4 14 10 17
+             c-4 11 3 23 16 23
+             c6 0 10-2 14-6"/>
+    <path d="M153 79
+             c10-12 30-3 30 13
+             c0 8-4 14-10 17
+             c4 11-3 23-16 23
+             c-6 0-10-2-14-6"/>
+    <path d="M128 70v66"/>
+    <path d="M128 82c-8-8-18-7-24 0"/>
+    <path d="M128 102c-10-8-20-6-28 2"/>
+    <path d="M128 122c-8-6-18-5-24 2"/>
+    <path d="M128 82c8-8 18-7 24 0"/>
+    <path d="M128 102c10-8 20-6 28 2"/>
+    <path d="M128 122c8-6 18-5 24 2"/>
+  </g>
+</svg>

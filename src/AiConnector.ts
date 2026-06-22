@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { ViewProvider } from './ViewProvider';
 
 export class AiConnector {
   private ollamaHost: string = "";
@@ -10,6 +11,8 @@ export class AiConnector {
   private manageExtensionIdentifier = "ai-connector.manageExtension";
 
   private settingsPageIdentifier = "ai-connector.openSettings";
+
+  // private sidebar = "ai-connector.valoomaPanel";
 
   public setOllamaHost(ollamaHost: string) {
     this.ollamaHost = ollamaHost;
@@ -51,8 +54,20 @@ export class AiConnector {
     if (disposableIdentifier === this.settingsPageIdentifier) {
       return this.getSettingsPage();
     }
+    // if (disposableIdentifier === this.sidebar) {
+    //   return this.getSidebar();
+    // }
     throw Error("Not valid disposable name.");
   }
+
+  // private getSidebar(): vscode.Disposable {
+  //   const viewProvider = new ViewProvider();
+  //   return vscode.window.registerWebviewViewProvider(
+  //     this.sidebar,
+  //     viewProvider,
+  //     { webviewOptions: { retainContextWhenHidden: true } }
+  //   );
+  // }
 
   private getOllamaServerTester(): vscode.Disposable {
     const disposable = vscode.commands.registerCommand(

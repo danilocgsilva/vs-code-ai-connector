@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 import { AiConnector } from './AiConnector';
+import { ViewProvider } from './ViewProvider';
+// import { ViewProvider } from './ViewProvider';
 
 const aiConnector = new AiConnector();
 
@@ -13,6 +15,28 @@ export function activate(context: vscode.ExtensionContext) {
 	// Initial setup
 	const initialHost = updateConfig();
 	aiConnector.setOllamaHost(initialHost);
+
+	// View
+
+	// const valoomaSidebar: vscode.Disposable = aiConnector.getDisposable("ai-connector.valoomaPanel");
+	// context.subscriptions.push(valoomaSidebar);
+
+	// const viewProvider = new ViewProvider();
+	// context.subscriptions.push(
+    //     vscode.window.registerWebviewViewProvider(
+    //         'my-extension-view',
+    //         viewProvider,
+    //         { webviewOptions: { retainContextWhenHidden: true } }
+    //     )
+    // );
+
+	const viewProvider = new ViewProvider();
+	const valoomaSidebar = vscode.window.registerWebviewViewProvider(
+		"ai-connector.valoomaPanel",
+		viewProvider,
+		{ webviewOptions: { retainContextWhenHidden: true}}
+	);
+	context.subscriptions.push(valoomaSidebar);
 
 	// Commands registration
 	const writeIntoCursor: vscode.Disposable = aiConnector.getDisposable("ai-connector.insertText");

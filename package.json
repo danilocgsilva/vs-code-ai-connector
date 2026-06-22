@@ -13,6 +13,22 @@
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "ai-connector.valoomaPanel",
+          "name": "Valooma",
+          "when": "workbenchState != empty",
+          "icon": "media/brain_laptop_icon.svg"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "ai-connector.valoomaPanel",
+        "contents": "Valooma panel content"
+      }
+    ],
     "commands": [
       {
         "command": "ai-connector.insertText",
