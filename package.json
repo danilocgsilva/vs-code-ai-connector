@@ -10,25 +10,34 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onView:ai-connector.valoomaPanel",
+    "onView:valoomaPanel",
+    "onCommand:ai-connector.insertText",
+    "onCommand:ai-connector.testOllamaServer",
+    "onCommand:ai-connector.manageExtension",
+    "onCommand:ai-connector.openSettings"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
-    "views": {
-      "explorer": [
+    "viewsContainers": {
+      "activitybar": [
         {
-          "id": "ai-connector.valoomaPanel",
-          "name": "Valooma",
-          "when": "workbenchState != empty",
-          "icon": "media/brain_laptop_icon.svg"
+          "id": "valoomaPanel",
+          "title": "Valooma AI",
+          "icon": "media/brain_laptop_icon_2.svg"
         }
       ]
     },
-    "viewsWelcome": [
-      {
-        "view": "ai-connector.valoomaPanel",
-        "contents": "Valooma panel content"
-      }
-    ],
+    "views": {
+      "valoomaPanel": [
+        {
+          "id": "ai-connector.valoomaPanel",
+          "name": "Valooma",
+          "type": "webview"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "ai-connector.insertText",

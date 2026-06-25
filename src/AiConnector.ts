@@ -12,7 +12,7 @@ export class AiConnector {
 
   private settingsPageIdentifier = "ai-connector.openSettings";
 
-  // private sidebar = "ai-connector.valoomaPanel";
+  private sidebar = "ai-connector.valoomaPanel";
 
   public setOllamaHost(ollamaHost: string) {
     this.ollamaHost = ollamaHost;
@@ -41,7 +41,7 @@ export class AiConnector {
     }
   }
 
-  getDisposable(disposableIdentifier: string): vscode.Disposable {
+  getDisposable(disposableIdentifier: string, context?: vscode.ExtensionContext): vscode.Disposable {
     if (disposableIdentifier === this.commandIdentifier) {
       return this.getWriteIntoCursor();
     }
@@ -54,20 +54,20 @@ export class AiConnector {
     if (disposableIdentifier === this.settingsPageIdentifier) {
       return this.getSettingsPage();
     }
-    // if (disposableIdentifier === this.sidebar) {
-    //   return this.getSidebar();
-    // }
+    if (disposableIdentifier === this.sidebar && context !== undefined) {
+      return this.getSidebar(context);
+    }
     throw Error("Not valid disposable name.");
   }
 
-  // private getSidebar(): vscode.Disposable {
-  //   const viewProvider = new ViewProvider();
-  //   return vscode.window.registerWebviewViewProvider(
-  //     this.sidebar,
-  //     viewProvider,
-  //     { webviewOptions: { retainContextWhenHidden: true } }
-  //   );
-  // }
+  private getSidebar(context: vscode.ExtensionContext): vscode.Disposable {
+    const viewProvider = new ViewProvider(context.extensionUri);
+    return vscode.window.registerWebviewViewProvider(
+      this.sidebar,
+      viewProvider,
+      { webviewOptions: { retainContextWhenHidden: true } }
+    );
+  }
 
   private getOllamaServerTester(): vscode.Disposable {
     const disposable = vscode.commands.registerCommand(

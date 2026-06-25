@@ -1,11 +1,21 @@
 import * as vscode from 'vscode';
 
 export class ViewProvider implements vscode.WebviewViewProvider {
-    public resolveWebviewView(webviewView: vscode.WebviewView) {
-        webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
+    private _view?: vscode.WebviewView;
+
+    constructor(private readonly _extensionUri: vscode.Uri) {}
+
+    public resolveWebviewView(
+        webviewView: vscode.WebviewView
+    ): void | Thenable<void> {
+        this._view = webviewView;
+        webviewView.webview.html = this.getHtmlForWebview(webviewView);
+        webviewView.webview.options = {
+            enableScripts: true
+        };
     }
 
-    private getHtmlForWebview(webview: vscode.Webview) {
+    private getHtmlForWebview(webview: vscode.WebviewView) {
         return `
             <!DOCTYPE html>
             <html lang="en">
