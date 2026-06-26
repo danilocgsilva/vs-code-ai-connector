@@ -1,7 +1,5 @@
 import * as vscode from 'vscode';
 import { AiConnector } from './AiConnector';
-// import { ViewProvider } from './ViewProvider';
-import { ViewProvider } from './ViewProvider';
 
 const aiConnector = new AiConnector();
 
